@@ -93,7 +93,7 @@ namespace CarRentingWebApp.Controllers
                 }
             }
 
-            return RedirectToAction(nameof(Index), "Home");
+             return RedirectToAction(nameof(Index), "Home");
         }
 
         [Authorize(Roles = "Admin")]
@@ -171,7 +171,7 @@ namespace CarRentingWebApp.Controllers
             {
                 TempData["ErrorMessage"] = "Error deleting user.";
             }
-            return RedirectToAction("AdminIndex");
+             return RedirectToAction("AdminIndex");
         }
 
         [Authorize(Roles = "Admin")]
