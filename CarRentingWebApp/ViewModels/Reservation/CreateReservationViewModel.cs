@@ -4,7 +4,7 @@ namespace CarRentingWebApp.ViewModels.Reservation
 {
     public class CreateReservationViewModel
     {
-        public int VehicleId { get; set; }
+         public int VehicleId { get; set; }
          public string Brand { get; set; } = null!;
          public string Model { get; set; } = null!;
          public string? Description { get; set; }
