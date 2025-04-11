@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CarRentingWebApp.Data.Models
 {
-    public class ApplicationUser : IdentityUser
-    {
+     public class ApplicationUser : IdentityUser
+     {
           [Required]
           [MaxLength(50)]
          public string FirstName { get; set; } = null!;
@@ -18,5 +18,5 @@ namespace CarRentingWebApp.Data.Models
          public string EGN { get; set; } = null!;
 
          public ICollection<IdentityUserRole<string>> Roles { get; set; } = new HashSet<IdentityUserRole<string>>();
-    }
+     }
 }
