@@ -20,6 +20,6 @@ namespace CarRentingWebApp.ViewModels.Reservation
 
          [Required(ErrorMessage = "End date is required")]
          [DataType(DataType.Date)]
-         public DateTime EndDate { get; set; }
+          public DateTime EndDate { get; set; }
     }
 }
