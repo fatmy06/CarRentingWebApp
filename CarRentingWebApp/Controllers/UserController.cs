@@ -185,16 +185,16 @@ namespace CarRentingWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AdminCreateUser(CreateUserViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                var user = await userService.CreateUserWithoutSignInAsync(model);
-                if (user != null)
-                {
+             if (ModelState.IsValid)
+             {
+                 var user = await userService.CreateUserWithoutSignInAsync(model);
+                 if (user != null)
+                 {
                     TempData["SuccessMessage"] = "User created successfully.";
                     return RedirectToAction("AdminIndex", "User");
-                }
-                ModelState.AddModelError(string.Empty, "User creation failed. Please try again.");
-            }
+                 }
+                 ModelState.AddModelError(string.Empty, "User creation failed. Please try again.");
+             }
 
             return View(model);
         }
