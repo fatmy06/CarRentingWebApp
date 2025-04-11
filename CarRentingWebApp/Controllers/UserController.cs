@@ -11,9 +11,9 @@ namespace CarRentingWebApp.Controllers
 {
     public class UserController : Controller
     {
-        private readonly IUserService userService;
-        private readonly IReservationService reservationService;
-        private readonly SignInManager<ApplicationUser> signInManager;
+         private readonly IUserService userService;
+         private readonly IReservationService reservationService;
+         private readonly SignInManager<ApplicationUser> signInManager;
 
         public UserController(IUserService userService, SignInManager<ApplicationUser> signInManager, IReservationService reservationService)
         {
