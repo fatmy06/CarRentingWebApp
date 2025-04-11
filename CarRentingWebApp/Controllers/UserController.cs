@@ -17,9 +17,9 @@ namespace CarRentingWebApp.Controllers
 
         public UserController(IUserService userService, SignInManager<ApplicationUser> signInManager, IReservationService reservationService)
         {
-            this.userService = userService;
-            this.signInManager = signInManager;
-            this.reservationService = reservationService;
+             this.userService = userService;
+             this.signInManager = signInManager;
+             this.reservationService = reservationService;
         }
 
         public IActionResult Index()
