@@ -174,11 +174,11 @@ namespace CarRentingWebApp.Controllers
              return RedirectToAction("AdminIndex");
         }
 
-        [Authorize(Roles = "Admin")]
-        public IActionResult AdminCreateUser()
-        {
+         [Authorize(Roles = "Admin")]
+         public IActionResult AdminCreateUser()
+         {
             return View(new CreateUserViewModel());
-        }
+         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
@@ -207,7 +207,7 @@ namespace CarRentingWebApp.Controllers
             var reservations = await reservationService.GetReservationsByUserIdAsync(userId);
 
 
-            return View(reservations);
+             return View(reservations);
         }
     }
 }

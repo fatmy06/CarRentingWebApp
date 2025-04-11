@@ -5,8 +5,8 @@ namespace CarRentingWebApp.Data.Models
 {
     public class ApplicationUser : IdentityUser
     {
-         [Required]
-         [MaxLength(50)]
+          [Required]
+          [MaxLength(50)]
          public string FirstName { get; set; } = null!;
 
          [Required]
