@@ -11,8 +11,8 @@ namespace CarRentingWebApp.Controllers
 {
     public class ReservationController : Controller
     {
-        private readonly IReservationService _reservationService;
-        private readonly IVehicleService _vehicleService;
+       private readonly IReservationService _reservationService;
+       private readonly IVehicleService _vehicleService;
 
         public ReservationController(IReservationService reservationService, IVehicleService vehicleService)
         {
@@ -20,6 +20,7 @@ namespace CarRentingWebApp.Controllers
             _vehicleService = vehicleService;
         }
 
+       
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Rent(int vehicleId)

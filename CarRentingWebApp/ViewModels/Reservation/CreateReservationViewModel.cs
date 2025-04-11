@@ -12,6 +12,7 @@ namespace CarRentingWebApp.ViewModels.Reservation
         public decimal PricePerDay { get; set; }
         public int Year { get; set; }
 
+        
         [Required(ErrorMessage = "Start date is required")]
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
