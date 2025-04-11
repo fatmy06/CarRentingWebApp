@@ -10,7 +10,7 @@ namespace CarRentingWebApp.ViewModels.Reservation
         public string? Description { get; set; }
         public string ImageUrl { get; set; } = null!;
         public decimal PricePerDay { get; set; }
-        public int Year { get; set; }
+         public int Year { get; set; }
 
         
         
