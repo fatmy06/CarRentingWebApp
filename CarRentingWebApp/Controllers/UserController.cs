@@ -157,9 +157,9 @@ namespace CarRentingWebApp.Controllers
             return View(user);
         }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+         [HttpPost, ActionName("Delete")]
+         [ValidateAntiForgeryToken]
+         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
              var result = await userService.DeleteUserAsync(id);

@@ -7,11 +7,11 @@ namespace CarRentingWebApp.Data.Models
     {
          [Required]
          [MaxLength(50)]
-        public string FirstName { get; set; } = null!;
+         public string FirstName { get; set; } = null!;
 
-        [Required]
-        [MaxLength(50)]
-        public string LastName { get; set; } = null!;
+         [Required]
+         [MaxLength(50)]
+         public string LastName { get; set; } = null!;
 
          [Required]
          [MaxLength(10)]
