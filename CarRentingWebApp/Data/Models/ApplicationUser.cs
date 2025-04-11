@@ -17,6 +17,6 @@ namespace CarRentingWebApp.Data.Models
          [MaxLength(10)]
         public string EGN { get; set; } = null!;
 
-        public ICollection<IdentityUserRole<string>> Roles { get; set; } = new HashSet<IdentityUserRole<string>>();
+         public ICollection<IdentityUserRole<string>> Roles { get; set; } = new HashSet<IdentityUserRole<string>>();
     }
 }
