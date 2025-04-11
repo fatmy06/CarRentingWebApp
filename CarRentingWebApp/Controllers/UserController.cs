@@ -163,15 +163,15 @@ namespace CarRentingWebApp.Controllers
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
              var result = await userService.DeleteUserAsync(id);
-             if (result.Succeeded)
-             {
-                TempData["SuccessMessage"] = "User deleted successfully.";
-             }
-             else
-             {
+              if (result.Succeeded)
+              {
+                 TempData["SuccessMessage"] = "User deleted successfully.";
+              }
+              else
+              {
                 TempData["ErrorMessage"] = "Error deleting user.";
-             }
-             return RedirectToAction("AdminIndex");
+              }
+              return RedirectToAction("AdminIndex");
         }
 
          [Authorize(Roles = "Admin")]
