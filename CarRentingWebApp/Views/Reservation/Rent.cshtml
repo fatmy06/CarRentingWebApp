@@ -1,0 +1,69 @@
+﻿@model CarRentingWebApp.ViewModels.Reservation.RentReservationCompositeViewModel
+
+@{
+    ViewData["Title"] = "Rent " + Model.Vehicle.Brand + " " + Model.Vehicle.Model;
+}
+
+<div class="py-5 text-center" style="background-color: #f8f9fa;">
+    <h1>Rent @Model.Vehicle.Brand @Model.Vehicle.Model</h1>
+    <p class="lead">Fill in your rental dates and complete your reservation</p>
+</div>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @if (!string.IsNullOrEmpty(Model.Vehicle.ImageUrl))
+                            {
+                                <img src="@Model.Vehicle.ImageUrl" alt="@Model.Vehicle.Brand @Model.Vehicle.Model" class="img-fluid rounded">
+                            }
+                        </div>
+                        <div class="col-md-6">
+                            <h2>@Model.Vehicle.Brand @Model.Vehicle.Model</h2>
+                            <p><strong>Year:</strong> @Model.Vehicle.Year</p>
+                            <p><strong>Price Per Day:</strong> @Model.Vehicle.PricePerDay.ToString("C")</p>
+                            <p><strong>Description:</strong> @Model.Vehicle.Description</p>
+                        </div>
+                    </div>
+                    <hr />
+                    <form asp-action="Rent" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                        <input type="hidden" asp-for="ReservationInput.VehicleId" value="@Model.Vehicle.Id" />
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="ReservationInput.StartDate" type="date" class="form-control" />
+                                    <label asp-for="ReservationInput.StartDate">Start Date</label>
+                                    <span asp-validation-for="ReservationInput.StartDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="ReservationInput.EndDate" type="date" class="form-control" />
+                                    <label asp-for="ReservationInput.EndDate">End Date</label>
+                                    <span asp-validation-for="ReservationInput.EndDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg w-100">Confirm Rental</button>
+                    </form>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <a asp-controller="Vehicle" asp-action="Details" asp-route-id="@Model.Vehicle.Id" class="btn btn-secondary">
+                    Back to Details
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

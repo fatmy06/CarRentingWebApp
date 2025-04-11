@@ -1,0 +1,147 @@
+﻿@model CarRentingWebApp.ViewModels.Vehicle.VehicleViewModel
+
+@{
+    ViewData["Title"] = $"{Model.Brand} {Model.Model} Details";
+}
+
+<style>
+    :root {
+        --primary-color: #007bff;
+        --primary-dark: #0056b3;
+        --accent-color: #00aaff;
+        --glass-bg: rgba(255, 255, 255, 0.15);
+        --glass-border: rgba(255, 255, 255, 0.3);
+        --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        --transition-speed: 0.3s;
+        --container-max-width: 1100px;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: var(--font-family);
+        background: #f4f7f9;
+        color: #333;
+    }
+
+    .details-container {
+        max-width: var(--container-max-width);
+        margin: 3rem auto;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 1rem;
+        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .image-container {
+        position: relative;
+    }
+
+        .image-container::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 1rem;
+        }
+
+    .vehicle-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .vehicle-info {
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+        .vehicle-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .vehicle-info p {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            color: #555;
+        }
+
+    .action-buttons {
+        margin-top: 2rem;
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+        .action-buttons a,
+        .action-buttons button {
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            transition: background var(--transition-speed), transform var(--transition-speed);
+            border: none;
+        }
+
+            .action-buttons a:hover,
+            .action-buttons button:hover {
+                background: linear-gradient(135deg, var(--primary-dark), var(--accent-color));
+                transform: translateY(-3px);
+            }
+
+    .btn-secondary {
+        background: #6c757d !important;
+    }
+
+    .btn-warning {
+        background: #ffc107 !important;
+    }
+</style>
+
+<div class="details-container container">
+    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+    {
+        <div class="image-container">
+            <img src="@Model.ImageUrl" alt="@Model.Brand @Model.Model" class="vehicle-image" />
+        </div>
+    }
+    <div class="vehicle-info">
+        <h2>@Model.Brand @Model.Model</h2>
+        <p><strong>Year:</strong> @Model.Year</p>
+        <p><strong>Passenger Seats:</strong> @Model.PassengerSeats</p>
+        <p><strong>Price Per Day:</strong> @Model.PricePerDay.ToString("C")</p>
+        <p><strong>Description:</strong> @Model.Description</p>
+        <div class="action-buttons">
+            <a asp-controller="Reservation" asp-action="Rent" asp-route-vehicleId="@Model.Id">Rent Now</a>
+            <a asp-action="All" class="btn btn-secondary">Back to Vehicles</a>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <a asp-controller="Vehicle" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+
+                <form asp-controller="Vehicle" asp-action="Delete" method="get" style="display:inline;">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit" class="btn btn-danger">Remove</button>
+                </form>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+﻿@model CreateUserViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<!-- Header Section -->
+<div class="py-5 text-center" style="background-color: #f8f9fa;">
+    <h1>Create an Account</h1>
+    <p class="lead">Join us today! Fill in the details below to get started.</p>
+</div>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <form id="registerForm" asp-action="Create" method="post">
+                        <h2 class="h4 mb-4 text-center">Sign Up</h2>
+                        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                        <!-- First Name -->
+                        <div class="form-floating mb-3">
+                            <input asp-for="FirstName" class="form-control" placeholder="First Name" />
+                            <label asp-for="FirstName">First Name</label>
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="form-floating mb-3">
+                            <input asp-for="LastName" class="form-control" placeholder="Last Name" />
+                            <label asp-for="LastName">Last Name</label>
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+
+                        <!-- EGN -->
+                        <div class="form-floating mb-3">
+                            <input asp-for="EGN" class="form-control" placeholder="EGN" />
+                            <label asp-for="EGN">EGN</label>
+                            <span asp-validation-for="EGN" class="text-danger"></span>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-floating mb-3">
+                            <input asp-for="Email" class="form-control" autocomplete="username" placeholder="name@example.com" />
+                            <label asp-for="Email">Email</label>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-floating mb-3">
+                            <input asp-for="Password" class="form-control" autocomplete="new-password" placeholder="Password" type="password" />
+                            <label asp-for="Password">Password</label>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="form-floating mb-4">
+                            <input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" placeholder="Confirm Password" type="password" />
+                            <label asp-for="ConfirmPassword">Confirm Password</label>
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+
+                        <button id="registerSubmit" type="submit" class="btn btn-primary btn-lg w-100">
+                            Register
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-center mt-3">
+                <small class="text-muted">
+                    Already have an account? <a asp-controller="User" asp-action="Login">Login here</a>.
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

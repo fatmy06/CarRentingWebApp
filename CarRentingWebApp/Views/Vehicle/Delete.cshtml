@@ -1,0 +1,118 @@
+﻿@model CarRentingWebApp.ViewModels.Vehicle.VehicleViewModel
+
+@{
+    ViewData["Title"] = "Delete Vehicle";
+}
+
+<style>
+    :root {
+        --primary-color: #dc3545; /* Danger color for delete */
+        --primary-dark: #c82333;
+        --bg-overlay: rgba(255, 255, 255, 0.95);
+        --card-radius: 1rem;
+        --transition-speed: 0.3s;
+        --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        background: url('/images/abstract-bg.jpg') no-repeat center center fixed;
+        background-size: cover;
+        font-family: var(--font-family);
+        margin: 0;
+        padding: 0;
+    }
+
+    .overlay {
+        background-color: var(--bg-overlay);
+        min-height: 100vh;
+        padding: 2rem;
+    }
+
+    .top-center-container {
+        margin-top: 2rem;
+    }
+
+    .card-custom {
+        border: none;
+        border-radius: var(--card-radius);
+        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
+        background-color: #fff;
+        transition: transform var(--transition-speed);
+    }
+
+        .card-custom:hover {
+            transform: translateY(-5px);
+        }
+
+    .card-header-custom {
+        background: linear-gradient(135deg, var(--primary-color), #ff6b6b);
+        padding: 2rem;
+        color: #fff;
+        text-align: center;
+    }
+
+        .card-header-custom h2 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .card-header-custom small {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+    .card-body-custom {
+        padding: 2rem;
+    }
+
+    .btn-custom {
+        background: linear-gradient(135deg, var(--primary-color), #ff6b6b);
+        border: none;
+        color: #fff;
+        font-size: 1.1rem;
+        border-radius: 0.5rem;
+        padding: 0.75rem;
+        transition: background var(--transition-speed);
+    }
+
+        .btn-custom:hover {
+            background: linear-gradient(135deg, var(--primary-dark), #e55353);
+        }
+</style>
+
+<div class="overlay">
+    <div class="container top-center-container">
+        <div class="row">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <div class="card card-custom mb-4">
+                    <div class="card-header-custom">
+                        <h2>Delete Vehicle</h2>
+                        <small>Are you sure you want to delete this vehicle?</small>
+                    </div>
+                    <div class="card-body-custom">
+                        <h4>@Model.Brand @Model.Model</h4>
+                        <p><strong>Year:</strong> @Model.Year</p>
+                        <p><strong>Seats:</strong> @Model.PassengerSeats</p>
+                        <p><strong>Price Per Day:</strong> @Model.PricePerDay.ToString("C")</p>
+                        <p><strong>Description:</strong> @Model.Description</p>
+                        <hr />
+                        <form asp-action="Delete" method="post">
+                            @Html.AntiForgeryToken()
+                            <!-- Hidden field for Id -->
+                            <input asp-for="Id" type="hidden" />
+                            <button type="submit" class="btn btn-custom btn-lg w-100">Confirm Delete</button>
+                        </form>
+                        <a asp-action="Index" class="btn btn-secondary btn-lg w-100 mt-3">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

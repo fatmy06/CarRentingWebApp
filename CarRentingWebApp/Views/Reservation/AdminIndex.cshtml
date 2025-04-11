@@ -1,0 +1,73 @@
+﻿@model IEnumerable<CarRentingWebApp.ViewModels.Reservation.ReservationAdminViewModel>
+
+@{
+    ViewData["Title"] = "All Reservations";
+}
+
+<div class="container my-5">
+    <h1 class="mb-4 text-center">All Reservations</h1>
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Vehicle</th>
+                <th scope="col">User</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Any())
+            {
+                foreach (var reservation in Model)
+                {
+                    <tr>
+                        <td>@reservation.Id</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                @if (!string.IsNullOrEmpty(reservation.VehicleImageUrl))
+                                {
+                                    <img src="@reservation.VehicleImageUrl" alt="@reservation.VehicleBrand" class="img-thumbnail me-2" style="max-width: 50px;" />
+                                }
+                                <div>
+                                    <strong>@reservation.VehicleBrand</strong> @reservation.VehicleModel
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <strong>@reservation.UserFullName</strong>
+                                <div class="small text-muted">@reservation.UserEmail</div>
+                            </div>
+                        </td>
+                        <td>@reservation.StartDate.ToShortDateString()</td>
+                        <td>@reservation.EndDate.ToShortDateString()</td>
+                        <td>@reservation.ReservationStatus</td>
+                        <td>
+                            <form asp-controller="Reservation" asp-action="RemoveAsAdmin" method="post" style="display:inline;">
+                                <input type="hidden" name="reservationId" value="@reservation.Id" />
+                                <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                            </form>
+
+                            @if (reservation.ReservationStatus.ToString() == "Pending")
+                            {
+                                <form asp-action="Approve" asp-controller="Reservation" method="post" style="display:inline;">
+                                    <input type="hidden" name="reservationId" value="@reservation.Id" />
+                                    <button type="submit" class="btn btn-sm btn-success">Approve</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="7" class="text-center">No reservations found.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

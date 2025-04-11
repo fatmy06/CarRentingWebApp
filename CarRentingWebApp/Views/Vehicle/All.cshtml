@@ -1,0 +1,149 @@
+﻿@model CarRentingWebApp.ViewModels.Vehicle.VehiclesIndexViewModel
+
+@{
+    ViewData["Title"] = "Available Vehicles";
+}
+
+<style>
+    :root {
+        --primary-color: #007bff;
+        --primary-dark: #0069d9;
+        --bg-color: #f8f9fa;
+        --card-radius: 1rem;
+        --transition-speed: 0.3s;
+        --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        --shadow-color: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+        font-family: var(--font-family);
+        background-color: var(--bg-color);
+        margin: 0;
+        padding: 0;
+    }
+
+    .vehicle-container {
+        padding: 3rem 0;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        color: var(--primary-color);
+    }
+
+    .filter-form {
+        background: #fff;
+        padding: 1.5rem;
+        border-radius: var(--card-radius);
+        box-shadow: 0 0.5rem 1rem var(--shadow-color);
+        margin-bottom: 2rem;
+    }
+
+        .filter-form .form-control {
+            border-radius: var(--card-radius);
+        }
+
+        .filter-form button {
+            font-weight: 500;
+        }
+
+    /* Remove default anchor styling for the card links */
+    .card-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
+
+    .card-vehicle {
+        border: none;
+        border-radius: var(--card-radius);
+        overflow: hidden;
+        box-shadow: 0 0.5rem 1rem var(--shadow-color);
+        transition: transform var(--transition-speed);
+        background: #fff;
+    }
+
+        .card-vehicle:hover {
+            transform: translateY(-5px);
+        }
+
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+        width: 100%;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--primary-color);
+    }
+
+    .card-text {
+        font-size: 0.95rem;
+        color: #555;
+        margin-bottom: 0.75rem;
+    }
+
+    .card-footer {
+        background: #fff;
+        padding: 1rem;
+        text-align: center;
+        border-top: 1px solid #eee;
+    }
+</style>
+
+<div class="container vehicle-container">
+    <h1 class="page-title">Available Vehicles for Rent</h1>
+
+    <!-- Filter Form -->
+    <form method="get" class="filter-form mx-auto" style="max-width: 700px;">
+        <div class="row align-items-end">
+            <div class="col-md-5 mb-2">
+                <label for="startDate" class="form-label">Start Date</label>
+                <input type="date" name="startDate" id="startDate" value="@Model.StartDate?.ToString("yyyy-MM-dd")" class="form-control" />
+            </div>
+            <div class="col-md-5 mb-2">
+                <label for="endDate" class="form-label">End Date</label>
+                <input type="date" name="endDate" id="endDate" value="@Model.EndDate?.ToString("yyyy-MM-dd")" class="form-control" />
+            </div>
+            <div class="col-md-2 mb-2">
+                <button type="submit" class="btn btn-primary w-100">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Vehicles Listing -->
+    <div class="row">
+        @foreach (var vehicle in Model.Vehicles)
+        {
+            <div class="col-md-4 mb-4">
+                <a asp-controller="Vehicle" asp-action="Details" asp-route-id="@vehicle.Id" class="card-link">
+                    <div class="card card-vehicle h-100">
+                        @if (!string.IsNullOrEmpty(vehicle.ImageUrl))
+                        {
+                            <img src="@vehicle.ImageUrl" class="card-img-top" alt="@vehicle.Brand @vehicle.Model" />
+                        }
+                        <div class="card-body">
+                            <h5 class="card-title">@vehicle.Brand @vehicle.Model</h5>
+                            <p class="card-text">
+                                <strong>Year:</strong> @vehicle.Year<br />
+                                <strong>Seats:</strong> @vehicle.PassengerSeats<br />
+                                <strong>Price per day:</strong> @vehicle.PricePerDay.ToString("C")
+                            </p>
+                            <p class="card-text">@vehicle.Description</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>
