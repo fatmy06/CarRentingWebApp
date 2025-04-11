@@ -4,8 +4,8 @@ namespace CarRentingWebApp.Data.Models
 {
     public class Vehicle
     {
-        [Required]
-        [Key]
+         [Required]
+         [Key]
         public int Id { get; set; }
 
         [Required]
